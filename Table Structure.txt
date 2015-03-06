@@ -1,0 +1,15 @@
+Table Name: Candidates
+id
+name
+description
+
+Table Name: Voter
+id
+username
+email
+password
+
+Table Name: Votes
+id
+candidate_id
+voter_id
