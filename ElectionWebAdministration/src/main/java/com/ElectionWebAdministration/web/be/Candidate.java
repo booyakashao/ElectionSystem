@@ -1,5 +1,7 @@
 package com.ElectionWebAdministration.web.be;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +12,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Candidates")
-public class Candidate {
+public class Candidate implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8220947521349892032L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Candidates_id_seq")
 	@SequenceGenerator(name="Candidates_id_seq", sequenceName="Candidates_id_seq", allocationSize=1)

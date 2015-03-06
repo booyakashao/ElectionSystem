@@ -1,5 +1,7 @@
 package com.ElectionWebAdministration.web.be;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Voter")
-public class Voter {
+public class Voter implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3057598622746772940L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Voter_id_seq")

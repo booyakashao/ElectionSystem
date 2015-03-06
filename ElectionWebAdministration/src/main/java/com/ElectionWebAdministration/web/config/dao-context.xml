@@ -18,5 +18,38 @@
 	<context:component-scan base-package="com.ElectionWebAdministration.web.be">
 	</context:component-scan>
 	
-	
+	<beans profile="production">
+		<bean id="propertyConfigurer"
+        	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+        	p:location="classpath:com/ThrottleCTRL/web/config/config.properties"></bean>
+		
+		<bean id="postgresDataSource"
+        	class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+        	p:driverClassName="${jdbc.driver}"
+       	 	p:url="${jdbc.url}" p:username="${jdbc.username}"
+        	p:password="${jdbc.password}">
+        </bean>
+        
+        <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+			<property name="dataSource" ref="postgresDataSource"></property>
+			<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				</props>
+			</property>
+			<property name="packagesToScan">
+				<list>
+					<value>com.ElectionWebAdministration.web.dao</value>
+					<value>com.ElectionWebAdministration.web.be</value>
+				</list>
+			</property>
+		</bean>
+		
+		<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+			<property name="dataSource" ref="postgresDataSource"></property>
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		
+		<tx:annotation-driven />
+	</beans>
 </beans>
