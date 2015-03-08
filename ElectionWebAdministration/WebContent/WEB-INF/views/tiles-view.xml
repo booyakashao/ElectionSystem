@@ -4,7 +4,21 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
        
 <tiles-definitions>
+    <!--  Layouts -->
+    <definition name="electionAppBaseLayout" template="/WEB-INF/views/layouts/baseLayout.jsp">
+        <put-attribute name="title" value="Election Application Administration Page"></put-attribute>
+        <put-attribute name="header" value="/WEB-INF/views/inc/header.jsp"></put-attribute>
+        <put-attribute name="navBar" value="/WEB-INF/views/inc/navigationBar.jsp"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/content.jsp"></put-attribute>
+        <put-attribute name="footer" value="/WEB-INF/views/inc/footer.jsp"></put-attribute>
+    </definition>
+    <definition name="blankLayout" template="/WEB-INF/views/layouts/blankLayout.jsp">
+        <put-attribute name="title" value="Blank Page"></put-attribute>
+        <put-attribute name="content" value=""></put-attribute>
+    </definition>
     
-    
-    
+    <!-- Tiles -->
+    <definition name="index" extends="electionAppBaseLayout">
+	    <put-attribute name="content" value="/WEB-INF/views/inc/homeContent/content.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

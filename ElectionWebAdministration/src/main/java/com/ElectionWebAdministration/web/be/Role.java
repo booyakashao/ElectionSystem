@@ -3,13 +3,19 @@ package com.ElectionWebAdministration.web.be;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
 import org.springframework.security.core.GrantedAuthority;
 
+@Entity
+@Table(name="Role")
+@Proxy(lazy=false)
 public class Role implements Serializable, GrantedAuthority{
 
 	/**
