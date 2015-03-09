@@ -8,6 +8,7 @@ public class VoteFunctionController {
 
 	private static final Logger logger = Logger.getLogger(VoteFunctionController.class);
 	
+	
 	public String votePage() {
 		
 		return null;
