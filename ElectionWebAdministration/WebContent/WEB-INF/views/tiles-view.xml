@@ -21,4 +21,25 @@
     <definition name="index" extends="electionAppBaseLayout">
 	    <put-attribute name="content" value="/WEB-INF/views/inc/homeContent/content.jsp"></put-attribute>
 	</definition>
+	
+    <definition name="login" extends="electionAppBaseLayout">
+        <put-attribute name="title" value="Login"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/loginContent/content.jsp"></put-attribute>
+    </definition>
+    <definition name="loggedout" extends="electionAppBaseLayout">
+        <put-attribute name="title" value="Log Out Screen"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/loggedOutContent/content.jsp"></put-attribute>
+    </definition>
+    <definition name="signup" extends="electionAppBaseLayout">
+        <put-attribute name="title" value="Sign Up"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/signupContent/content.jsp"></put-attribute>
+    </definition>
+    <definition name="accountcreated" extends="electionAppBaseLayout">
+        <put-attribute name="title" value="Account Creation Confirmation"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/accountCreatedContent/content.jsp"></put-attribute>
+    </definition>
+    <definition name="denied" extends="electionAppBaseLayout">
+        <put-attribute name="title" value="Access Denied"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/deniedContent/content.jsp"></put-attribute>
+    </definition>
 </tiles-definitions>

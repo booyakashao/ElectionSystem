@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Candidates")
+@Table(name="candidates")
 public class Candidate implements Serializable{
 	
 	/**
@@ -20,8 +20,8 @@ public class Candidate implements Serializable{
 	private static final long serialVersionUID = -8220947521349892032L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Candidates_id_seq")
-	@SequenceGenerator(name="Candidates_id_seq", sequenceName="Candidates_id_seq", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="candidates_id_seq")
+	@SequenceGenerator(name="candidates_id_seq", sequenceName="candidates_id_seq", allocationSize=1)
 	@Column(name="id")
 	private long id;
 	

@@ -14,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Vote")
+@Table(name="vote")
 public class Vote implements Serializable {
 
 	/**
@@ -23,8 +23,8 @@ public class Vote implements Serializable {
 	private static final long serialVersionUID = 4938831741346567691L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Vote_id_seq")
-	@SequenceGenerator(name="Vote_id_seq", sequenceName="Vote_id_seq", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vote_id_seq")
+	@SequenceGenerator(name="vote_id_seq", sequenceName="vote_id_seq", allocationSize=1)
 	@Column(name="id")
 	private long id;
 	

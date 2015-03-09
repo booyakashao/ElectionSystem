@@ -48,6 +48,20 @@ public class UserService {
 		return voterDAO.create(newVoter);
 	}
 	
+	public Serializable createVoter(Voter newVoter) {
+		
+		if(!roleDAO.roleExists(newVoter.getRole().getRoleName())) {
+			roleDAO.create(newVoter.getRole());
+		} else {
+			newVoter.setRole(roleDAO.findRoleByName("ROLE_VOTER"));
+		}
+		
+		
+		newVoter.setPassword( passwordEncoder.encode(newVoter.getPassword()) );
+		newVoter.setEnabled(true);
+		return voterDAO.create(newVoter);
+	}
+	
 	public boolean voterExists(Voter voter) {
 		try {
 			if(voterDAO.get(voter.getId()) != null) {

@@ -15,6 +15,7 @@
 		<security:intercept-url pattern="/" access="permitAll"/>
 		<security:intercept-url pattern="/static/**" access="permitAll" />
 		<security:intercept-url pattern="/login" access="permitAll" />
+		<security:intercept-url pattern="/signup" access="permitAll" />
 		<security:intercept-url pattern="/loggedout" access="permitAll" />
 		<security:intercept-url pattern="/denied" access="permitAll" />
 		<security:intercept-url pattern="/dologin" access="permitAll" />

@@ -14,7 +14,7 @@ import org.hibernate.annotations.Proxy;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-@Table(name="Role")
+@Table(name="role")
 @Proxy(lazy=false)
 public class Role implements Serializable, GrantedAuthority{
 
@@ -34,6 +34,10 @@ public class Role implements Serializable, GrantedAuthority{
 	
 	public Role() {
 		
+	}
+	
+	public Role(String roleName) {
+		this.roleName = roleName;
 	}
 	
 	public long getId() {

@@ -21,12 +21,15 @@
 			
 				<sec:authorize access="!isAuthenticated()">
 					<form class="" action='<c:url value="/login" />' method="GET">
-						<button class="btn btn-default dropdown-toggle" type="submit">Login</button>
+						<button class="btn btn-default" type="submit">Login</button>
+					</form>
+					<form class="" action='<c:url value="/signup" />' method="GET">
+						<button class="btn btn-default" type="submit">Sign Up</button>
 					</form>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<form class="" action='<c:url value="/j_spring_security_logout" />' method="GET">
-						<button class="btn btn-default dropdown-toggle" type="submit">Logout</button>
+						<button class="btn btn-default" type="submit">Logout</button>
 					</form>
 				</sec:authorize>
 				
