@@ -21,7 +21,6 @@
     <definition name="index" extends="electionAppBaseLayout">
 	    <put-attribute name="content" value="/WEB-INF/views/inc/homeContent/content.jsp"></put-attribute>
 	</definition>
-	
     <definition name="login" extends="electionAppBaseLayout">
         <put-attribute name="title" value="Login"></put-attribute>
         <put-attribute name="content" value="/WEB-INF/views/inc/loginContent/content.jsp"></put-attribute>
@@ -41,5 +40,17 @@
     <definition name="denied" extends="electionAppBaseLayout">
         <put-attribute name="title" value="Access Denied"></put-attribute>
         <put-attribute name="content" value="/WEB-INF/views/inc/deniedContent/content.jsp"></put-attribute>
+    </definition>
+    <definition name="admin" extends="electionAppBaseLayout">
+        <put-attribute name="title" value="Administration Page"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/adminPageContent/content.jsp"></put-attribute>
+    </definition>
+    <definition name="candidatepage" extends="electionAppBaseLayout">
+        <put-attribute name="title" value="Candidates View Page"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/candidatePageContent/content.jsp"></put-attribute>
+    </definition>
+    <definition name="newcandidatepage" extends="electionAppBaseLayout">
+        <put-attribute name="title" value="Create Candidate"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/createCandidateContent/content.jsp"></put-attribute>
     </definition>
 </tiles-definitions>

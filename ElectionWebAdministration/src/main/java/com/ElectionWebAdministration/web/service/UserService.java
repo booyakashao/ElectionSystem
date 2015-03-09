@@ -78,4 +78,8 @@ public class UserService {
 	public List<Voter> getAllVoters() {
 		return voterDAO.getAll();
 	}
+	
+	public void DeleteVoter(long id) {
+		voterDAO.delete(id);
+	}
 }
