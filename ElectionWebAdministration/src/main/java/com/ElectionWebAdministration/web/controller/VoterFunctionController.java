@@ -44,10 +44,6 @@ public class VoterFunctionController {
 		return "signup";
 	}
 	
-	/*@RequestParam("role") String desiredRole*/
-	
-	/*, new Role(desiredRole)*/
-	
 	@RequestMapping(value="/createaccount", method=RequestMethod.POST)
 	public String doCreate(ModelMap model, @Valid Voter voter, BindingResult result) {
 		
