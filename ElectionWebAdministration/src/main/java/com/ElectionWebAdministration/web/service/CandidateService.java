@@ -25,6 +25,11 @@ public class CandidateService {
 		
 	}
 	
+	public Candidate getCandidateById(long id) {
+		
+		return candidateDAO.get(id);
+	}
+	
 	public boolean candidateExists(Candidate candidate) {
 		try {
 			if(candidateDAO.get(candidate.getId()) != null) {

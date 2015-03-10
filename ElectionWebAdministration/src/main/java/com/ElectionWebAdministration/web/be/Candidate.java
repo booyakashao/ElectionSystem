@@ -10,8 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
+
 @Entity
 @Table(name="candidates")
+@Proxy(lazy=false)
 public class Candidate implements Serializable{
 	
 	/**

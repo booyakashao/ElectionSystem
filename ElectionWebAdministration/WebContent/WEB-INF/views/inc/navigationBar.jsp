@@ -9,7 +9,7 @@
 		<div class="media">
 			<div class="media-left">
 				<a href='<c:url value="/" />'> <img
-					class="media-object" src="" alt=""> Logo
+					class="media-object" src="" alt=""> Logo Here
 				</a>
 			</div>
 		</div>

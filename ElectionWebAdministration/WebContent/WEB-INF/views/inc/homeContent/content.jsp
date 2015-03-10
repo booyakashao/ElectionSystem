@@ -6,8 +6,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <div class="list-group">
+	<sec:authorize access="isAuthenticated()">
+		<a href='<c:url value="/vote" />' class="list-group-item">
+			<h4 class="list-group-item-heading">Vote Here</h4>
+			<p class="list-group-item-text">
+				Vote for Candidates Here.
+			</p>
+		</a>
+	</sec:authorize>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<a href='<c:url value="/admin" />' class="list-group-item active">
+		<a href='<c:url value="/admin" />' class="list-group-item">
 			<h4 class="list-group-item-heading">Administration Page</h4>
 			<p class="list-group-item-text">Administration page for voters and other admins</p>
 		</a>

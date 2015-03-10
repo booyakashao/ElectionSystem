@@ -13,8 +13,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
+
 @Entity
 @Table(name="vote")
+@Proxy(lazy=false)
 public class Vote implements Serializable {
 
 	/**

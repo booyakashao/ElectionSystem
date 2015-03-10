@@ -12,8 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
+
 @Entity
 @Table(name="voter")
+@Proxy(lazy=false)
 public class Voter implements Serializable {
 
 	/**
