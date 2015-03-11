@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ public class CandidateService {
 	@Qualifier("candidateDAO")
 	private ICandidateDAO candidateDAO;
 	
+	@Secured("ROLE_ADMIN")
 	public Serializable createCandidate(Candidate candidate) {
 		
 		return candidateDAO.create(candidate);
@@ -46,6 +48,7 @@ public class CandidateService {
 		return candidateDAO.getAll();
 	}
 	
+	@Secured("ROLE_ADMIN")
 	public void deleteCandidate(long id) {
 		candidateDAO.delete(id);
 	}

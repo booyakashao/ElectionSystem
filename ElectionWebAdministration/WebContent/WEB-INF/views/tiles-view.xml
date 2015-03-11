@@ -61,4 +61,8 @@
         <put-attribute name="title" value="Candidate Voting Page"></put-attribute>
         <put-attribute name="content" value="/WEB-INF/views/inc/voteCandidateContent/content.jsp"></put-attribute>
     </definition>
+    <definition name="viewcandidate" extends="electionAppBaseLayout">
+        <put-attribute name="title" value="Candidate Detail Page"></put-attribute>
+        <put-attribute name="content" value="/WEB-INF/views/inc/viewCandidateContent/content.jsp"></put-attribute>
+    </definition>
 </tiles-definitions>

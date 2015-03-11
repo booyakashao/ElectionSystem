@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,7 +80,8 @@ public class UserService {
 		return voterDAO.getAll();
 	}
 	
-	public void DeleteVoter(long id) {
+	@Secured("ROLE_ADMIN")
+	public void deleteVoter(long id) {
 		voterDAO.delete(id);
 	}
 }

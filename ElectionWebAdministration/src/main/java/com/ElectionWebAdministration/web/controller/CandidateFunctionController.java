@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ElectionWebAdministration.web.be.Candidate;
 import com.ElectionWebAdministration.web.service.CandidateService;
+import com.ElectionWebAdministration.web.service.VoteService;
 
 @Controller
 public class CandidateFunctionController {
@@ -21,12 +22,26 @@ public class CandidateFunctionController {
 	@Qualifier("candidateService")
 	private CandidateService candidateService;
 	
+	@Autowired
+	@Qualifier("voteService")
+	private VoteService voteServices;
+	
 	@RequestMapping(value="/candidatepage", method=RequestMethod.GET)
 	public String candidatePage(ModelMap model) {
 		
 		model.addAttribute("allCandidates", candidateService.getAllCandidates());
 		
 		return "candidatepage";
+	}
+	
+	@RequestMapping(value="/viewcandidatepage/{candidateId}", method=RequestMethod.GET)
+	public String viewCandidatePage(ModelMap model, @PathVariable("candidateId") long candidateId) {
+		Candidate currentCandidate = candidateService.getCandidateById(candidateId);
+		
+		model.addAttribute("currentCandidate", currentCandidate);
+		model.addAttribute("voteCount", voteServices.voteCount(currentCandidate));
+		
+		return "viewcandidate";
 	}
 	
 	@RequestMapping(value="/candidatepage/delete/{candidateId}", method=RequestMethod.GET)

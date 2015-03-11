@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ElectionWebAdministration.web.be.Candidate;
+import com.ElectionWebAdministration.web.be.Vote;
 import com.ElectionWebAdministration.web.be.Voter;
 import com.ElectionWebAdministration.web.be.WebUser;
 import com.ElectionWebAdministration.web.service.CandidateService;
+import com.ElectionWebAdministration.web.service.VoteService;
 
 @Controller
 public class VoteFunctionController {
@@ -23,6 +25,10 @@ public class VoteFunctionController {
 	@Autowired
 	@Qualifier("candidateService")
 	private CandidateService candidateService;
+	
+	@Autowired
+	@Qualifier("voteService")
+	private VoteService voteService;
 	
 	@RequestMapping(value="/vote", method=RequestMethod.GET)
 	public String votePage(ModelMap model) {
@@ -40,8 +46,44 @@ public class VoteFunctionController {
 		
 		Candidate currentCandidate = candidateService.getCandidateById(candidateId);
 		
+		if(voteService.voterHasVote(currentVoter)) {
+			Vote currentVote = voteService.getVoteByVoter(currentVoter);
+			if(currentVote.getCandidate().getId() == currentCandidate.getId() &&
+				currentVote.getCandidate().getDescription().matches(currentCandidate.getDescription()) &&
+				currentVote.getCandidate().getName().matches(currentCandidate.getName())) {
+				model.addAttribute("currentVote", "You are curently voting for this candidate.");
+				model.addAttribute("thisCandidateVoted", true);
+			} else {
+				model.addAttribute("thisCandidateVoted", false);
+				model.addAttribute("currentVote", "You are currenty voting for " + currentVote.getCandidate().getName() + ". Do you want to change your vote?");
+			}
+		} else {
+			model.addAttribute("thisCandidateVoted", false);
+		}
+
 		model.addAttribute("currentCandidate", currentCandidate);
 		
 		return "votecandidate";
+	}
+	
+	@RequestMapping(value="/castvote/{candidateId}", method=RequestMethod.GET)
+	public String castVote(ModelMap model, @PathVariable("candidateId") long candidateId) {
+		
+		WebUser currentUser = (WebUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Voter currentVoter = currentUser.getVoter();
+		Candidate targetCandidate = candidateService.getCandidateById(candidateId);
+		
+		if(voteService.voterHasVote(currentVoter)) {
+			Vote currentVote = voteService.getVoteByVoter(currentVoter);
+			if(currentVote.getCandidate() != targetCandidate) {
+				voteService.deleteVote(currentVote.getId());
+				
+				voteService.createVote(new Vote(targetCandidate, currentVoter));
+			}
+		} else {
+			voteService.createVote(new Vote(targetCandidate, currentVoter));
+		}
+		
+		return voteCandidate(model, candidateId);
 	}
 }

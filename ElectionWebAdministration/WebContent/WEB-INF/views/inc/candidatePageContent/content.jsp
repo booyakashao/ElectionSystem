@@ -14,6 +14,7 @@
 		<tr>
 			<th>Name</th>
 			<th>Description</th>
+			<th>Detail</th>
 			<th>Delete</th>
 		</tr>
 	</thead>
@@ -22,6 +23,9 @@
 			<tr>
 				<td>${candidate.name}</td>
 				<td>${candidate.description}</td>
+				<td>
+					<a href='<c:url value="/viewcandidatepage/${candidate.id}" />' >Detail</a>
+				</td>
 				<td>
 					<a onclick="return confirm('Are you sure you want to delete this candidate?')" href='<c:url value="/candidatepage/delete/${candidate.id}" />' >Delete</a>
 				</td>

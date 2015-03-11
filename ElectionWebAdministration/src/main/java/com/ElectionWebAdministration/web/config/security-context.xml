@@ -26,6 +26,7 @@
 		<security:intercept-url pattern="/newcandidatepage" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/vote" access="isAuthenticated()" />
 		<security:intercept-url pattern="/votecandidate/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/viewcandidate/**" access="isAuthenticated()" />
 		<security:form-login login-page="/login" authentication-failure-url="/login?error=true" />
 		<security:logout logout-success-url="/loggedout" />
 		<security:access-denied-handler error-page="/denied" />

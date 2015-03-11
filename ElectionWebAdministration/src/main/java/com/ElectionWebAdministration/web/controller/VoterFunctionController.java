@@ -75,7 +75,7 @@ public class VoterFunctionController {
 	@RequestMapping(value="/delete/{voterId}", method=RequestMethod.GET)
 	public String deleteVote(@PathVariable("voterId") long voterId, ModelMap model) {
 		
-		userService.DeleteVoter(voterId);
+		userService.deleteVoter(voterId);
 		model.addAttribute("voterDeleteConfirm", "Voter " + voterId + " has been deleted.");
 		
 		return administrationPage(model);

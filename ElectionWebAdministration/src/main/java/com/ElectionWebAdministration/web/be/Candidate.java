@@ -90,14 +90,14 @@ public class Candidate implements Serializable{
 		if (description == null) {
 			if (other.description != null)
 				return false;
-		} else if (!description.equals(other.description))
+		} else if (!description.matches(other.description))
 			return false;
 		if (id != other.id)
 			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!name.matches(other.name))
 			return false;
 		return true;
 	}
