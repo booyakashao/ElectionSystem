@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ElectionSystemApp</string>
+    <string name="login_activity">Login View</string>
+    <string name="action_settings">Settings</string>
+</resources>
