@@ -30,6 +30,9 @@
   	<slf4j-jcl.version>1.7.5</slf4j-jcl.version>
   	<junit.version>4.12</junit.version>
   	<log4j.version>1.2.15</log4j.version>
+  	<jackson.verison>1.9.13</jackson.verison>
+  	<jackson-core.version>2.5.1</jackson-core.version>
+  	<jackson-databind.version>2.5.1</jackson-databind.version>
   </properties>
   
   <dependencies>
@@ -221,6 +224,26 @@
             		<artifactId>jms</artifactId>
     			</exclusion>
 			</exclusions>
+	</dependency>
+	<dependency>
+    	<groupId>org.codehaus.jackson</groupId>
+    	<artifactId>jackson-core-asl</artifactId>
+    	<version>${jackson.verison}</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.codehaus.jackson</groupId>
+    	<artifactId>jackson-mapper-asl</artifactId>
+    	<version>${jackson.verison}</version>
+	</dependency>
+	<dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+    	<artifactId>jackson-core</artifactId>
+    	<version>${jackson-core.version}</version>
+	</dependency>
+	<dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+    	<artifactId>jackson-databind</artifactId>
+    	<version>${jackson-databind.version}</version>
 	</dependency>
   </dependencies>
   

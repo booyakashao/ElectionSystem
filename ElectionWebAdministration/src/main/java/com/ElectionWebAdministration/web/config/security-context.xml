@@ -20,6 +20,7 @@
 		<security:intercept-url pattern="/denied" access="permitAll" />
 		<security:intercept-url pattern="/dologin" access="permitAll" />
 		<security:intercept-url pattern="/itemview/**" access="permitAll" />
+		<security:intercept-url pattern="/androidlogin/**" access="permitAll" />
 		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/delete/**" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/candidatepage/**" access="hasRole('ROLE_ADMIN')" />

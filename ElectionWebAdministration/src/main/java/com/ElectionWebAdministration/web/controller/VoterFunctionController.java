@@ -13,9 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ElectionWebAdministration.web.be.Voter;
-import com.ElectionWebAdministration.web.dao.IVoterDAO;
 import com.ElectionWebAdministration.web.service.UserService;
 
 @Controller
@@ -82,4 +82,11 @@ public class VoterFunctionController {
 	}
 	
 	//===========================================================================================
+	
+	//Mobile Login Paths=======================================================================
+	@RequestMapping(value="/androidlogin", headers="Accept=*/*", method = RequestMethod.GET)
+	public @ResponseBody Voter testJSONRequest() {
+		return userService.getAllVoters().get(0);
+	}
+	//=========================================================================================
 }
