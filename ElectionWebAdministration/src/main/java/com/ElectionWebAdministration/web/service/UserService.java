@@ -76,6 +76,10 @@ public class UserService {
 		return false;
 	}
 	
+	public Voter findVoterByUsername(String username) {
+		return voterDAO.findByUsername(username);
+	}
+	
 	public List<Voter> getAllVoters() {
 		return voterDAO.getAll();
 	}
@@ -83,5 +87,9 @@ public class UserService {
 	@Secured("ROLE_ADMIN")
 	public void deleteVoter(long id) {
 		voterDAO.delete(id);
+	}
+	
+	public boolean checkPasswordMatch(String rawPassword, String encodedPassword) {
+		return passwordEncoder.matches(rawPassword, encodedPassword);
 	}
 }

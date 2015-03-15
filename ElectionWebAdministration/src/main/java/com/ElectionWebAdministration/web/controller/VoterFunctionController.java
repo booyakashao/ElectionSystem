@@ -7,14 +7,17 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ElectionWebAdministration.web.be.AndroidLogin;
 import com.ElectionWebAdministration.web.be.Voter;
 import com.ElectionWebAdministration.web.service.UserService;
 
@@ -84,9 +87,32 @@ public class VoterFunctionController {
 	//===========================================================================================
 	
 	//Mobile Login Paths=======================================================================
-	@RequestMapping(value="/androidlogin", headers="Accept=*/*", method = RequestMethod.GET)
-	public @ResponseBody Voter testJSONRequest() {
-		return userService.getAllVoters().get(0);
+	@RequestMapping(value="/androidlogin", method = RequestMethod.POST)
+	public @ResponseBody Voter testJSONRequest(@RequestBody AndroidLogin androidLogin) {
+		
+		// find voter by username
+		Voter foundVoter = null;
+		
+		try {
+			foundVoter = userService.findVoterByUsername(androidLogin.getUsername());
+		} catch (Exception e) {
+			logger.error("Voter not found.");
+			logger.error("Username: " + androidLogin.getUsername());
+			logger.error("Password: " + androidLogin.getPassword());
+			return new Voter();
+		}
+				
+		
+		if(userService.checkPasswordMatch(androidLogin.getPassword(), foundVoter.getPassword())) {
+			logger.info("The passwords match");
+		} else {
+			logger.info("The passwords do not match");
+		}
+		
+		return foundVoter;
 	}
+	
+	
+	
 	//=========================================================================================
 }
