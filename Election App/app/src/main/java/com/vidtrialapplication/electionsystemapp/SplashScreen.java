@@ -21,6 +21,7 @@ public class SplashScreen extends ActionBarActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 Intent loginActivity = new Intent(SplashScreen.this, LoginActivity.class);
                 SplashScreen.this.startActivity(loginActivity);
                 SplashScreen.this.finish();

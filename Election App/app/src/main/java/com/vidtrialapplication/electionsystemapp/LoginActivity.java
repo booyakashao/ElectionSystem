@@ -5,13 +5,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -25,6 +23,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.vidtrialapplication.electionsystemapp.loginconnect.LoginVerification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -260,14 +260,23 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
+
+            try {
+                LoginVerification.httpRequestAttempt();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+
             // TODO: attempt authentication against a network service.
 
+            /*
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
             }
+            */
 
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
