@@ -1,6 +1,7 @@
 package com.electionsystemapp.utils;
 
 import com.vidtrialapplication.electionsystemapp.loginconnect.AndroidLogin;
+import com.vidtrialapplication.electionsystemapp.loginconnect.Voter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,5 +24,23 @@ public class JSONUtils {
         }
 
         return null;
+    }
+
+    public static Voter jsonToVoter(String jsonString) {
+        try {
+            JSONObject finalObject = new JSONObject(jsonString);
+            Voter returnedVoter = new Voter();
+
+            returnedVoter.setId(finalObject.getLong("id"));
+            returnedVoter.setUsername(finalObject.getString("username"));
+            returnedVoter.setRoleName(finalObject.getJSONObject("role").getString("roleName"));
+
+            return returnedVoter;
+        } catch(JSONException e) {
+            e.printStackTrace();
+
+            return new Voter();
+        }
+
     }
 }

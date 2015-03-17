@@ -17,14 +17,14 @@ public class LoginVerification {
 
     public static String URL_LOGIN = "http://192.168.3.6:8080/ElectionWebAdministration/androidlogin/";
 
-    public static void httpRequestAttempt() throws Exception {
+    public static Voter httpRequestAttempt(String username, String password) throws Exception {
         HttpClient httpClient = new DefaultHttpClient();
 
         //url with post data
         HttpPost httpPost = new HttpPost(URL_LOGIN);
 
         //Creating JSON Object
-        AndroidLogin loginCredentials = new AndroidLogin("voter","password");
+        AndroidLogin loginCredentials = new AndroidLogin("admin", "password");
         JSONObject androidJSON = JSONUtils.loginToJSON(loginCredentials);
 
         StringEntity stringEntity = new StringEntity("");
@@ -40,7 +40,8 @@ public class LoginVerification {
         httpPost.setHeader("Content-type", "application/json");
 
         ResponseHandler responseHandler = new BasicResponseHandler();
-        httpClient.execute(httpPost, responseHandler);
-        //JSONObject jsonObj = (JSONObject) httpClient.execute(httpPost, responseHandler);
+        String responseTest = (String) httpClient.execute(httpPost, responseHandler);
+
+        return JSONUtils.jsonToVoter(responseTest);
     }
 }
