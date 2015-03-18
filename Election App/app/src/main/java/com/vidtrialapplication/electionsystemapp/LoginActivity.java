@@ -27,7 +27,6 @@ import android.widget.TextView;
 import com.vidtrialapplication.electionsystemapp.loginconnect.LoginVerification;
 import com.vidtrialapplication.electionsystemapp.loginconnect.Voter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,6 +56,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private TextView mOutputText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                if (id == R.id.action_sign_in || id == EditorInfo.IME_ACTION_GO) {
                     attemptLogin();
                     return true;
                 }
@@ -89,17 +89,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-
+        mOutputText = (TextView) findViewById(R.id.outputText);
+;
     }
 
     private void populateAutoComplete() {
 
+        //Make sure this loads from the live database eventually. static fix for now
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,autocompleteUsername);
         mUsernameView.setThreshold(1);
         mUsernameView.setAdapter(adapter);
-
-        //Not sure what this does
-        //getLoaderManager().initLoader(0, null, this);
     }
 
 
@@ -201,6 +200,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                         ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
 
                 // Select only email addresses.
+                // but has been changed to select IMs
                 ContactsContract.Contacts.Data.MIMETYPE +
                         " = ?", new String[]{ContactsContract.CommonDataKinds.Email
                 .CONTENT_ITEM_TYPE},
@@ -212,14 +212,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        List<String> emails = new ArrayList<String>();
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            emails.add(cursor.getString(ProfileQuery.ADDRESS));
-            cursor.moveToNext();
-        }
 
-        addEmailsToAutoComplete(emails);
     }
 
     @Override
@@ -229,15 +222,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private interface ProfileQuery {
         String[] PROJECTION = {
-                ContactsContract.CommonDataKinds.Email.ADDRESS,
-                ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
+                ContactsContract.CommonDataKinds.Im.CONTACT_ID
         };
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
 
-
+    //May be removed soon
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
@@ -291,7 +283,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                finish();
+                //finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

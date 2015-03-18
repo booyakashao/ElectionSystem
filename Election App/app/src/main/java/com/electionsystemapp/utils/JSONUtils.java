@@ -43,4 +43,9 @@ public class JSONUtils {
         }
 
     }
+
+    //List all voter usernames
+    public static void ListOfAllVoters(String jsonString) {
+
+    }
 }

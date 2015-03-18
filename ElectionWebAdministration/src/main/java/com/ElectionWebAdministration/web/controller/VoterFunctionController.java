@@ -112,7 +112,10 @@ public class VoterFunctionController {
 		return foundVoter;
 	}
 	
-	
+	@RequestMapping(value="/androidlogin/getAllVoters/", method = RequestMethod.GET)
+	public @ResponseBody List<Voter> getAllVoters() {
+		return userService.getAllVoters();
+	}
 	
 	//=========================================================================================
 }
