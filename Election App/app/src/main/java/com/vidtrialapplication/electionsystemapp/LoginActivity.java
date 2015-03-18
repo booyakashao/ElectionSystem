@@ -43,6 +43,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+
+    private static final String[] autocompleteUsername = new String[] {
+            "voter", "admin"
+    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -89,7 +93,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private void populateAutoComplete() {
-        getLoaderManager().initLoader(0, null, this);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,autocompleteUsername);
+        mUsernameView.setThreshold(1);
+        mUsernameView.setAdapter(adapter);
+
+        //Not sure what this does
+        //getLoaderManager().initLoader(0, null, this);
     }
 
 
@@ -281,8 +291,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                //This must be commented out because it would close the view
-                //finish();
+                finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
