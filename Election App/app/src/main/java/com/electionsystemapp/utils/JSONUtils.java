@@ -3,6 +3,7 @@ package com.electionsystemapp.utils;
 import com.vidtrialapplication.electionsystemapp.loginconnect.AndroidLogin;
 import com.vidtrialapplication.electionsystemapp.loginconnect.Voter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,7 +46,21 @@ public class JSONUtils {
     }
 
     //List all voter usernames
-    public static void ListOfAllVoters(String jsonString) {
+    public static String[] ListOfAllVoters(String jsonString) {
+        try {
+            JSONArray stringArray = new JSONArray(jsonString);
+            int size = stringArray.length();
+            String[] listOfUsernames = new String[size];
 
+            for(int i = 0; i < size; i++) {
+                listOfUsernames[i] = (String) stringArray.get(i);
+            }
+
+            return listOfUsernames;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.vidtrialapplication.electionsystemapp.loginconnect.GenericDBCalls;
 import com.vidtrialapplication.electionsystemapp.loginconnect.LoginVerification;
 import com.vidtrialapplication.electionsystemapp.loginconnect.Voter;
 
@@ -42,10 +43,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
-
-    private static final String[] autocompleteUsername = new String[] {
-            "voter", "admin"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -57,6 +54,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mProgressView;
     private View mLoginFormView;
     private TextView mOutputText;
+    private String[] autocompleteUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +92,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private void populateAutoComplete() {
+        UserUtils usernamesPopulate = new UserUtils();
+        usernamesPopulate.execute((Void) null);
+
+        while(autocompleteUsername == null) {
+
+        }
 
         //Make sure this loads from the live database eventually. static fix for now
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,autocompleteUsername);
@@ -294,6 +298,21 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+    }
+
+    public class UserUtils extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+            try {
+                autocompleteUsername = GenericDBCalls.getAllUsernames();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return true;
         }
     }
 }
