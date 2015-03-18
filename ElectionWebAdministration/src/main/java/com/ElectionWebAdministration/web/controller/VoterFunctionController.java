@@ -1,5 +1,6 @@
 package com.ElectionWebAdministration.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -7,7 +8,6 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -113,8 +113,15 @@ public class VoterFunctionController {
 	}
 	
 	@RequestMapping(value="/androidlogin/getAllVoters/", method = RequestMethod.GET)
-	public @ResponseBody List<Voter> getAllVoters() {
-		return userService.getAllVoters();
+	public @ResponseBody List<String> getAllVoters() {
+		List<Voter> allVoters = userService.getAllVoters();
+		List<String> onlyUsernames = new ArrayList<String>();
+		
+		for(Voter currentVoter : allVoters) {
+			onlyUsernames.add(currentVoter.getUsername());
+		}
+		
+		return onlyUsernames;
 	}
 	
 	//=========================================================================================
