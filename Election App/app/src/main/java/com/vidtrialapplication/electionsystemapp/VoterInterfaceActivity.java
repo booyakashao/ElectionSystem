@@ -39,6 +39,12 @@ public class VoterInterfaceActivity extends ActionBarActivity {
         }
 
         mUsernameTextView.append(voter.getUsername());
+        switch(voter.getRoleName()) {
+            case "ROLE_ADMIN":mRoleTextView.append("Administrator");break;
+            case "ROLE_VOTER":mRoleTextView.append("Regular Voter");break;
+            default:mRoleTextView.append("Unknown Role");break;
+        }
+
         mRoleTextView.append(voter.getRoleName());
 
     }

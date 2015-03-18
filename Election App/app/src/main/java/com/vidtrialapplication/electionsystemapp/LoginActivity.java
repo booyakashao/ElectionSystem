@@ -55,7 +55,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private TextView mOutputText;
     private String[] autocompleteUsername;
     private Voter voterResponse;
 
@@ -90,8 +89,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        mOutputText = (TextView) findViewById(R.id.outputText);
-;
     }
 
     private void populateAutoComplete() {
