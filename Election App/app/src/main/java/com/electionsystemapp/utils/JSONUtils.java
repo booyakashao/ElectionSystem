@@ -27,6 +27,19 @@ public class JSONUtils {
         return null;
     }
 
+    public static JSONObject voterIdOnlyToJSON(long id) {
+        try {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("id", id);
+
+            return jsonObj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public static Voter jsonToVoter(String jsonString) {
         try {
             JSONObject finalObject = new JSONObject(jsonString);

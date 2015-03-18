@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ElectionWebAdministration.web.be.AndroidLogin;
+import com.ElectionWebAdministration.web.be.AndroidVoter;
 import com.ElectionWebAdministration.web.be.Voter;
 import com.ElectionWebAdministration.web.service.UserService;
 
@@ -122,6 +123,15 @@ public class VoterFunctionController {
 		}
 		
 		return onlyUsernames;
+	}
+	
+	
+	@RequestMapping(value="/androidlogin/voterid", method = RequestMethod.POST)
+	public @ResponseBody Voter getVoterById(@RequestBody AndroidVoter androidVoter) {
+		// find voter by id
+		Voter foundVoter = userService.getVoterById(androidVoter.getId());
+		
+		return foundVoter;
 	}
 	
 	//=========================================================================================

@@ -28,6 +28,10 @@
             android:label="@string/login_activity"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+        <activity
+            android:name=".VoterInterfaceActivity"
+            android:label="@string/title_activity_voter_interface" >
+        </activity>
     </application>
 
 </manifest>

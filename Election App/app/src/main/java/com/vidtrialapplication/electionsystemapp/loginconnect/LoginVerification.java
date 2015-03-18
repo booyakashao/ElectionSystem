@@ -15,7 +15,7 @@ import org.json.JSONObject;
  */
 public class LoginVerification {
 
-    public static String URL_LOGIN = "http://smashthebeetles.com:8083/androidlogin/";
+    private static String URL_LOGIN = "http://smashthebeetles.com:8083/androidlogin/";
 
     public static Voter httpRequestAttempt(String username, String password) throws Exception {
         HttpClient httpClient = new DefaultHttpClient();
@@ -24,7 +24,7 @@ public class LoginVerification {
         HttpPost httpPost = new HttpPost(URL_LOGIN);
 
         //Creating JSON Object
-        AndroidLogin loginCredentials = new AndroidLogin("admin", "password");
+        AndroidLogin loginCredentials = new AndroidLogin(username, password);
         JSONObject androidJSON = JSONUtils.loginToJSON(loginCredentials);
 
         StringEntity stringEntity = new StringEntity("");
@@ -40,8 +40,8 @@ public class LoginVerification {
         httpPost.setHeader("Content-type", "application/json");
 
         ResponseHandler responseHandler = new BasicResponseHandler();
-        String responseTest = (String) httpClient.execute(httpPost, responseHandler);
+        String responseText = (String) httpClient.execute(httpPost, responseHandler);
 
-        return JSONUtils.jsonToVoter(responseTest);
+        return JSONUtils.jsonToVoter(responseText);
     }
 }
