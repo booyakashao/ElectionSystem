@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.vidtrialapplication.electionsystemapp.loginconnect.Candidate;
 import com.vidtrialapplication.electionsystemapp.loginconnect.GenericDBCalls;
 import com.vidtrialapplication.electionsystemapp.loginconnect.Voter;
 
@@ -17,8 +18,10 @@ public class VoterInterfaceActivity extends ActionBarActivity {
 
     private TextView mUsernameTextView;
     private TextView mRoleTextView;
+    private TextView mCurrentCandidate;
     private Boolean isVoting = false;
     private Voter voter;
+    private Candidate currentVotedCandidate;
     private long voterId;
 
     @Override
@@ -29,12 +32,13 @@ public class VoterInterfaceActivity extends ActionBarActivity {
 
         mUsernameTextView = (TextView) findViewById(R.id.textUsername);
         mRoleTextView = (TextView) findViewById(R.id.textRole);
+        mCurrentCandidate = (TextView) findViewById(R.id.currentCandidate);
 
         //Initial Execution
         mVotingCalls = new VotingCalls();
         mVotingCalls.execute();
 
-        while(voter == null) {
+        while(voter == null || currentVotedCandidate == null) {
 
         }
 
@@ -45,7 +49,8 @@ public class VoterInterfaceActivity extends ActionBarActivity {
             default:mRoleTextView.append("Unknown Role");break;
         }
 
-        mRoleTextView.append(voter.getRoleName());
+        mCurrentCandidate.append(currentVotedCandidate.getName());
+
 
     }
 
@@ -78,6 +83,7 @@ public class VoterInterfaceActivity extends ActionBarActivity {
 
             try {
                 voter = GenericDBCalls.getVoterById(voterId);
+                currentVotedCandidate = GenericDBCalls.getVoterCandidate(voterId);
             } catch(Exception e) {
                 e.printStackTrace();
             }

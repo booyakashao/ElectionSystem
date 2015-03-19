@@ -1,6 +1,7 @@
 package com.electionsystemapp.utils;
 
 import com.vidtrialapplication.electionsystemapp.loginconnect.AndroidLogin;
+import com.vidtrialapplication.electionsystemapp.loginconnect.Candidate;
 import com.vidtrialapplication.electionsystemapp.loginconnect.Voter;
 
 import org.json.JSONArray;
@@ -56,6 +57,23 @@ public class JSONUtils {
             return new Voter();
         }
 
+    }
+
+    public static Candidate jsonToCandidate(String jsonString) {
+        try {
+            JSONObject finalObject = new JSONObject(jsonString);
+            Candidate returnedCandidate = new Candidate();
+
+            returnedCandidate.setId(finalObject.getLong("id"));
+            returnedCandidate.setName(finalObject.getString("name"));
+            returnedCandidate.setDescription(finalObject.getString("description"));
+
+            return returnedCandidate;
+        } catch(JSONException e) {
+            e.printStackTrace();
+
+            return new Candidate();
+        }
     }
 
     //List all voter usernames

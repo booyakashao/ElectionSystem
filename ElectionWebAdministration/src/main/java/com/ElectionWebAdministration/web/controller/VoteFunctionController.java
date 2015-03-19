@@ -7,9 +7,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ElectionWebAdministration.web.be.AndroidVoter;
 import com.ElectionWebAdministration.web.be.Candidate;
 import com.ElectionWebAdministration.web.be.Vote;
 import com.ElectionWebAdministration.web.be.Voter;
@@ -86,4 +89,22 @@ public class VoteFunctionController {
 		
 		return voteCandidate(model, candidateId);
 	}
+	
+	//Android Functions=================================================================================================
+	
+	@RequestMapping(value="/androidvote/votercandidate", method=RequestMethod.POST)
+	public @ResponseBody Candidate getCandidateForVoter(@RequestBody AndroidVoter androidVoter) {
+		
+		Voter currentVoter = new Voter();
+		currentVoter.setId(androidVoter.getId());
+		
+		if(voteService.voterHasVote(currentVoter)) {
+			Vote currentVote = voteService.getVoteByVoter(currentVoter);
+			return currentVote.getCandidate();
+		} else {
+			return null;
+		}
+	}
+	
+	//==================================================================================================================
 }
