@@ -70,12 +70,6 @@ public class VoterInterfaceActivity extends ActionBarActivity {
         mCurrentCandidate.append(currentVotedCandidate.getName());
 
         for(Candidate currentCandidate : allCandidates) {
-            System.out.println("Candidate ID: " + currentCandidate.getId());
-            System.out.println("Candidate Name: " + currentCandidate.getName());
-            System.out.println("Candidate Description: " + currentCandidate.getDescription());
-        }
-
-        for(Candidate currentCandidate : allCandidates) {
             Button candidateButton = new Button(this);
             candidateButton.setText(currentCandidate.getName());
             candidateButton.setId(View.generateViewId());
