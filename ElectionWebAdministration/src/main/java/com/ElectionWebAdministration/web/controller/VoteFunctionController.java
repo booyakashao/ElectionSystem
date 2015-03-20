@@ -1,5 +1,7 @@
 package com.ElectionWebAdministration.web.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -104,6 +106,11 @@ public class VoteFunctionController {
 		} else {
 			return null;
 		}
+	}
+	
+	@RequestMapping(value="/androidvote/allcandidates", method=RequestMethod.GET)
+	public @ResponseBody List<Candidate> getAllCandidates() {
+		return candidateService.getAllCandidates();
 	}
 	
 	//==================================================================================================================

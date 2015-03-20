@@ -8,6 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wengu on 3/16/15.
  */
@@ -93,5 +96,29 @@ public class JSONUtils {
         }
 
         return null;
+    }
+
+    public static List<Candidate> ListAllCandidates(String jsonString) {
+        try {
+            JSONArray candidateArray = new JSONArray(jsonString);
+            int size = candidateArray.length();
+            List<Candidate> listOfCandidates = new ArrayList<Candidate>();
+
+            for(int i = 0; i < size; i++) {
+                JSONObject currentCandidate = (JSONObject) candidateArray.get(i);
+                Candidate newCandidate = new Candidate();
+
+                newCandidate.setId(currentCandidate.getLong("id"));
+                newCandidate.setName(currentCandidate.getString("name"));
+                newCandidate.setDescription(currentCandidate.getString("description"));
+
+                listOfCandidates.add(newCandidate);
+            }
+
+            return listOfCandidates;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return new ArrayList<Candidate>();
+        }
     }
 }

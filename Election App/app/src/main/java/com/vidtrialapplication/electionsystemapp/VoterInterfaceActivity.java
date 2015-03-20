@@ -5,11 +5,17 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.vidtrialapplication.electionsystemapp.loginconnect.Candidate;
 import com.vidtrialapplication.electionsystemapp.loginconnect.GenericDBCalls;
 import com.vidtrialapplication.electionsystemapp.loginconnect.Voter;
+
+import java.util.List;
 
 
 public class VoterInterfaceActivity extends ActionBarActivity {
@@ -19,10 +25,15 @@ public class VoterInterfaceActivity extends ActionBarActivity {
     private TextView mUsernameTextView;
     private TextView mRoleTextView;
     private TextView mCurrentCandidate;
+
     private Boolean isVoting = false;
     private Voter voter;
     private Candidate currentVotedCandidate;
+    private List<Candidate> allCandidates;
     private long voterId;
+
+    private ScrollView mScrollView;
+    private LinearLayout mScrollLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +45,18 @@ public class VoterInterfaceActivity extends ActionBarActivity {
         mRoleTextView = (TextView) findViewById(R.id.textRole);
         mCurrentCandidate = (TextView) findViewById(R.id.currentCandidate);
 
+        //Views for Scrollview
+        mScrollView = (ScrollView) findViewById(R.id.scrollView);
+        mScrollLinearLayout = (LinearLayout) findViewById(R.id.scrollLinearLayout);
+
         //Initial Execution
         mVotingCalls = new VotingCalls();
         mVotingCalls.execute();
 
-        while(voter == null || currentVotedCandidate == null) {
+        while(voter == null ||
+                currentVotedCandidate == null ||
+                allCandidates == null ||
+                allCandidates.isEmpty()) {
 
         }
 
@@ -50,6 +68,19 @@ public class VoterInterfaceActivity extends ActionBarActivity {
         }
 
         mCurrentCandidate.append(currentVotedCandidate.getName());
+
+        for(Candidate currentCandidate : allCandidates) {
+            System.out.println("Candidate ID: " + currentCandidate.getId());
+            System.out.println("Candidate Name: " + currentCandidate.getName());
+            System.out.println("Candidate Description: " + currentCandidate.getDescription());
+        }
+
+        for(Candidate currentCandidate : allCandidates) {
+            Button candidateButton = new Button(this);
+            candidateButton.setText(currentCandidate.getName());
+            candidateButton.setId(View.generateViewId());
+            mScrollLinearLayout.addView(candidateButton);
+        }
 
 
     }
@@ -83,6 +114,7 @@ public class VoterInterfaceActivity extends ActionBarActivity {
 
             try {
                 voter = GenericDBCalls.getVoterById(voterId);
+                allCandidates = GenericDBCalls.getAllCandidates();
                 currentVotedCandidate = GenericDBCalls.getVoterCandidate(voterId);
             } catch(Exception e) {
                 e.printStackTrace();
