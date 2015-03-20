@@ -105,12 +105,10 @@ public class VoterFunctionController {
 				
 		
 		if(userService.checkPasswordMatch(androidLogin.getPassword(), foundVoter.getPassword())) {
-			logger.info("The passwords match");
+			return foundVoter;
 		} else {
-			logger.info("The passwords do not match");
+			return null;
 		}
-		
-		return foundVoter;
 	}
 	
 	@RequestMapping(value="/androidlogin/getAllVoters/", method = RequestMethod.GET)
