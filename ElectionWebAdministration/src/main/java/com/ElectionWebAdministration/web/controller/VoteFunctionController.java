@@ -122,8 +122,6 @@ public class VoteFunctionController {
 	
 	@RequestMapping(value="/androidvote/candidatepage", method=RequestMethod.POST)
 	public @ResponseBody Candidate getCandidateById(@RequestBody AndroidCandidate androidCandidate) {
-		logger.info("Called CandidatePage Method");
-		logger.info("Candidate Id: " + androidCandidate.getId());
 		return candidateService.getCandidateById(androidCandidate.getId());
 	}
 	
