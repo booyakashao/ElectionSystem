@@ -18,21 +18,21 @@ import java.util.List;
  */
 public class GenericDBCalls {
 
-    /*
     private static String URL_GET_ALL_VOTERS = "http://smashthebeetles.com:8083/androidlogin/getAllVoters/";
     private static String URL_GET_VOTER_BY_ID = "http://smashthebeetles.com:8083/androidlogin/voterid/";
     private static String URL_GET_VOTER_CANDIDATE = "http://smashthebeetles.com:8083/androidvote/votercandidate/";
     private static String URL_GET_ALL_CANDIDATES = "http://smashthebeetles.com:8083/androidvote/allcandidates/";
     private static String URL_GET_CANDIDATE_BY_ID = "http://smashthebeetles.com:8083/androidvote/candidatepage/";
     private static String URL_CAST_VOTE = "http://smashthebeetles.com:8083/androidvote/castvote/";
-    */
+
+    /*
     private static String URL_GET_ALL_VOTERS = "http://192.168.3.6:8080/ElectionWebAdministration/androidlogin/getAllVoters/";
     private static String URL_GET_VOTER_BY_ID = "http://192.168.3.6:8080/ElectionWebAdministration/androidlogin/voterid/";
     private static String URL_GET_VOTER_CANDIDATE = "http://192.168.3.6:8080/ElectionWebAdministration/androidvote/votercandidate/";
     private static String URL_GET_ALL_CANDIDATES = "http://192.168.3.6:8080/ElectionWebAdministration/androidvote/allcandidates/";
     private static String URL_GET_CANDIDATE_BY_ID = "http://192.168.3.6:8080/ElectionWebAdministration/androidvote/candidatepage/";
     private static String URL_CAST_VOTE = "http://192.168.3.6:8080/ElectionWebAdministration/androidvote/castvote/";
-
+    */
     public static String[] getAllUsernames() throws Exception {
         HttpClient httpClient = new DefaultHttpClient();
 

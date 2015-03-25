@@ -15,8 +15,8 @@ import org.json.JSONObject;
  */
 public class LoginVerification {
 
-    //private static String URL_LOGIN = "http://smashthebeetles.com:8083/androidlogin/";
-    private static String URL_LOGIN = "http://192.168.3.6:8080/ElectionWebAdministration/androidlogin/";
+    private static String URL_LOGIN = "http://smashthebeetles.com:8083/androidlogin/";
+    //private static String URL_LOGIN = "http://192.168.3.6:8080/ElectionWebAdministration/androidlogin/";
 
     public static Voter httpRequestAttempt(String username, String password) throws Exception {
         HttpClient httpClient = new DefaultHttpClient();
