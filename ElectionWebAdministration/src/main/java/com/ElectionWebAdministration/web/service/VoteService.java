@@ -25,6 +25,10 @@ public class VoteService {
 		return voteDAO.create(vote);
 	}
 	
+	public void updateVote(Vote vote) {
+		voteDAO.update(vote);
+	}
+	
 	public Vote getVoteById(long id) {
 		return voteDAO.get(id);
 	}

@@ -126,12 +126,21 @@ public class VoteFunctionController {
 	}
 	
 	@RequestMapping(value="/androidvote/castvote", method=RequestMethod.POST)
-	public void castVote(@RequestBody AndroidVoteCast androidVoteCast) {
-		Vote vote = new Vote();
-		vote.setCandidate(candidateService.getCandidateById(androidVoteCast.getCandidateId()));
-		vote.setVoter(userService.getVoterById(androidVoteCast.getVoterId()));
+	public @ResponseBody String castVote(@RequestBody AndroidVoteCast androidVoteCast) {
 		
-		voteService.createVote(vote);
+		Voter currentVoter = userService.getVoterById(androidVoteCast.getVoterId());
+		Candidate currentCandidate = candidateService.getCandidateById(androidVoteCast.getCandidateId());
+		
+		Vote vote = voteService.getVoteByVoter(currentVoter);
+		try {
+			vote.setCandidate(candidateService.getCandidateById(androidVoteCast.getCandidateId()));
+			voteService.updateVote(vote);
+		} catch(NullPointerException e) {
+			vote = new Vote(currentCandidate, currentVoter);
+			voteService.createVote(vote);
+		}
+		
+		return "";
 	}
 	
 	//==================================================================================================================

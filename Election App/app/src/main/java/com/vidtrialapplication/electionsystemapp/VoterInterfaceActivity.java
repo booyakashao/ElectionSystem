@@ -68,7 +68,11 @@ public class VoterInterfaceActivity extends ActionBarActivity {
             default:mRoleTextView.append("Unknown Role");break;
         }
 
-        mCurrentCandidate.append(currentVotedCandidate.getName());
+         try {
+            mCurrentCandidate.append(currentVotedCandidate.getName());
+         } catch (NullPointerException e) {
+            mCurrentCandidate.append("No one");
+         }
 
         for(final Candidate currentCandidate : allCandidates) {
             Button candidateButton = new Button(this);
@@ -81,7 +85,11 @@ public class VoterInterfaceActivity extends ActionBarActivity {
                             Intent candidateIntent = new Intent(VoterInterfaceActivity.this, CandidateActivity.class);
                             candidateIntent.putExtra("candidateId", currentCandidate.getId());
                             candidateIntent.putExtra("voterId", voter.getId());
-                            candidateIntent.putExtra("currentlyVoting", currentVotedCandidate.getId());
+                            try {
+                                candidateIntent.putExtra("currentlyVoting", currentVotedCandidate.getId());
+                            } catch (NullPointerException e) {
+                                //Do nothing
+                            }
                             startActivity(candidateIntent);
                         }
                     }

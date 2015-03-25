@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -68,6 +69,20 @@ public class CandidateActivity extends ActionBarActivity {
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listViewArray);
         listView.setAdapter(adapter);
 
+        voteButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        voteFlag = true;
+                        mCandidateVotingCalls = new CandidatePageCalls();
+                        mCandidateVotingCalls.execute();
+
+                        Intent voterInterfaceIntent = new Intent(CandidateActivity.this, VoterInterfaceActivity.class);
+                        voterInterfaceIntent.putExtra("voter_id", voter.getId());
+                        startActivity(voterInterfaceIntent);
+                    }
+                }
+        );
 
     }
 
