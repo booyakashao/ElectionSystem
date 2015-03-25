@@ -32,6 +32,10 @@
             android:name=".VoterInterfaceActivity"
             android:label="@string/title_activity_voter_interface" >
         </activity>
+        <activity
+            android:name=".CandidateActivity"
+            android:label="@string/title_activity_candidate" >
+        </activity>
     </application>
 
 </manifest>

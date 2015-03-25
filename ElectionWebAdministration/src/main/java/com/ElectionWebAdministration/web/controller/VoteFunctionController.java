@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ElectionWebAdministration.web.be.AndroidCandidate;
+import com.ElectionWebAdministration.web.be.AndroidVoteCast;
 import com.ElectionWebAdministration.web.be.AndroidVoter;
 import com.ElectionWebAdministration.web.be.Candidate;
 import com.ElectionWebAdministration.web.be.Vote;
 import com.ElectionWebAdministration.web.be.Voter;
 import com.ElectionWebAdministration.web.be.WebUser;
 import com.ElectionWebAdministration.web.service.CandidateService;
+import com.ElectionWebAdministration.web.service.UserService;
 import com.ElectionWebAdministration.web.service.VoteService;
 
 @Controller
@@ -34,6 +37,10 @@ public class VoteFunctionController {
 	@Autowired
 	@Qualifier("voteService")
 	private VoteService voteService;
+	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	@RequestMapping(value="/vote", method=RequestMethod.GET)
 	public String votePage(ModelMap model) {
@@ -111,6 +118,22 @@ public class VoteFunctionController {
 	@RequestMapping(value="/androidvote/allcandidates", method=RequestMethod.GET)
 	public @ResponseBody List<Candidate> getAllCandidates() {
 		return candidateService.getAllCandidates();
+	}
+	
+	@RequestMapping(value="/androidvote/candidatepage", method=RequestMethod.POST)
+	public @ResponseBody Candidate getCandidateById(@RequestBody AndroidCandidate androidCandidate) {
+		logger.info("Called CandidatePage Method");
+		logger.info("Candidate Id: " + androidCandidate.getId());
+		return candidateService.getCandidateById(androidCandidate.getId());
+	}
+	
+	@RequestMapping(value="/androidvote/castvote", method=RequestMethod.POST)
+	public void castVote(@RequestBody AndroidVoteCast androidVoteCast) {
+		Vote vote = new Vote();
+		vote.setCandidate(candidateService.getCandidateById(androidVoteCast.getCandidateId()));
+		vote.setVoter(userService.getVoterById(androidVoteCast.getVoterId()));
+		
+		voteService.createVote(vote);
 	}
 	
 	//==================================================================================================================

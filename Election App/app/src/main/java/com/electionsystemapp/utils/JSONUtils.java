@@ -31,10 +31,24 @@ public class JSONUtils {
         return null;
     }
 
-    public static JSONObject voterIdOnlyToJSON(long id) {
+    public static JSONObject idOnlyToJSON(long id) {
         try {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("id", id);
+
+            return jsonObj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static JSONObject castVoteJSON(long candidateId, long voterId) {
+        try {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("voterId", voterId);
+            jsonObj.put("candidateId", candidateId);
 
             return jsonObj;
         } catch (Exception e) {

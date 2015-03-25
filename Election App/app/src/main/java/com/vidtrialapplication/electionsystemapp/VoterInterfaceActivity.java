@@ -1,5 +1,6 @@
 package com.vidtrialapplication.electionsystemapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -69,10 +70,22 @@ public class VoterInterfaceActivity extends ActionBarActivity {
 
         mCurrentCandidate.append(currentVotedCandidate.getName());
 
-        for(Candidate currentCandidate : allCandidates) {
+        for(final Candidate currentCandidate : allCandidates) {
             Button candidateButton = new Button(this);
             candidateButton.setText(currentCandidate.getName());
             candidateButton.setId(View.generateViewId());
+            candidateButton.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent candidateIntent = new Intent(VoterInterfaceActivity.this, CandidateActivity.class);
+                            candidateIntent.putExtra("candidateId", currentCandidate.getId());
+                            candidateIntent.putExtra("voterId", voter.getId());
+                            candidateIntent.putExtra("currentlyVoting", currentVotedCandidate.getId());
+                            startActivity(candidateIntent);
+                        }
+                    }
+            );
             mScrollLinearLayout.addView(candidateButton);
         }
 
